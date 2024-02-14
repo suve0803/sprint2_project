@@ -1,0 +1,193 @@
+<div class="">
+  <div style="height:100vh;">
+
+   <div class="">
+    
+     <div class="shadow w-20 p-5 position-absolute top-50 start-50 translate-middle">
+       <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+         <h4 class="display-6 text-center py-2">Admin Database</h4>
+        <div class="">
+          <label for="id">Admin Id </label>
+          <div class="">
+            <input id="id" required #id="ngModel" (ngModel)="id" name="id" type="text"  
+            class="form-control" placeholder="enter your admin id" pattern="(^\d{9}$)">
+            <div *ngIf="id.invalid && id.touched">
+              <small class="text-danger" *ngIf="id.errors?.['required']">Required
+
+              </small>
+              <small class="text-danger" *ngIf="id.errors?.['pattern']">Must be a valid number
+              </small>
+
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="name">Name </label>
+          <div class="">
+            <input id="name" required #name="ngModel" (ngModel)="name" name="name" type="text"  
+            class="form-control" placeholder="enter your name">
+            <div *ngIf="name.invalid && name.touched">
+              <small class="text-danger" *ngIf="name.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="password">Password</label>
+          <div class="">
+            <input id="password" required #password="ngModel" (ngModel)="password" name="password" type="text"  
+            class="form-control" placeholder="enter your password">
+            <div *ngIf="password.invalid && password.touched">
+              <small class="text-danger" *ngIf="password.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="mall">Mall</label>
+          <div class="">
+            <input id="mall" required #mall="ngModel" (ngModel)="mall" name="mall" type="text"  
+            class="form-control" placeholder="enter your mall">
+            <div *ngIf="mall.invalid && mall.touched">
+              <small class="text-danger" *ngIf="mall.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="phone">Phone number</label>
+          <div class="">
+            <input id="phone" required #phone="ngModel" (ngModel)="phone" name="phone" type="text"  
+            class="form-control" placeholder="enter your phone number">
+            <div *ngIf="phone.invalid && phone.touched">
+              <small class="text-danger" *ngIf="phone.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        
+        <div class="form-group text-center">
+          <input class="btn btn-primary" type="submit" value="submit">
+        </div>
+      </form>
+     </div>
+   </div>
+</div><br>
+<div class="mt-5">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Admin Id</th>
+        <th>Name</th>
+        <th>Password</th>
+        <th>Mall</th>
+        <th>Phone</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let admin of adminDetails">
+        <td>{{admin.id}}</td>
+        <td>{{admin.name}}</td>
+        <td>{{admin.password}}</td>
+        <td>{{admin.mall}}</td>
+        <td>{{admin.phone}}</td>
+        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(admin)">Edit</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteAdmin(admin)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update admin</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateAdmin()">
+          <h4 class="display-6 text-center py-2">Admin Database</h4>
+         <div class="">
+           <label for="id">Admin Id</label>
+           <div class="">
+             <input id="id" required #id="ngModel" [(ngModel)]="adminToUpdate.id" name="id" type="text"  
+             class="form-control" placeholder="enter your adamin id" pattern="(^\d{9}$)">
+             <div *ngIf="id.invalid && id.touched">
+               <small class="text-danger" *ngIf="id.errors?.['required']">Required
+ 
+               </small>
+               <small class="text-danger" *ngIf="id.errors?.['pattern']">Must be a valid number
+               </small>
+ 
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="name">Name </label>
+           <div class="">
+             <input id="name" required #name="ngModel" [(ngModel)]="adminToUpdate.name" name="name" type="text"  
+             class="form-control" placeholder="enter your name">
+             <div *ngIf="name.invalid && name.touched">
+               <small class="text-danger" *ngIf="name.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="password">Password </label>
+           <div class="">
+             <input id="password" required #password="ngModel" [(ngModel)]="adminToUpdate.password" name="password" type="text"  
+             class="form-control" placeholder="enter your password">
+             <div *ngIf="password.invalid && password.touched">
+               <small class="text-danger" *ngIf="password.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+          <label for="mall">Mall </label>
+          <div class="">
+            <input id="mall" required #mall="ngModel" [(ngModel)]="adminToUpdate.mall" name="mall" type="text"  
+            class="form-control" placeholder="enter your mall">
+            <div *ngIf="mall.invalid && mall.touched">
+              <small class="text-danger" *ngIf="mall.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="phone">Phone Number </label>
+          <div class="">
+            <input id="phone" required #phone="ngModel" [(ngModel)]="adminToUpdate.phone" name="phone" type="text"  
+            class="form-control" placeholder="enter your phone">
+            <div *ngIf="phone.invalid && phone.touched">
+              <small class="text-danger" *ngIf="phone.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+    
+         <div class="form-group text-center">
+           <input class="btn btn-primary" type="submit" value="update">
+         </div>
+       </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
